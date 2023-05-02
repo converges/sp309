@@ -5,17 +5,17 @@
 void *producer(void*);
 void *consumer(void*);
 
-#define MAX_BUF 100
-
-/* Declare a shared linkedlist */
+/* Declare a shared linked list */
 struct LinkedList buffer;
-ListInit(&buffer);
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t buffer_has_space = PTHREAD_COND_INITIALIZER;
 pthread_cond_t buffer_has_data = PTHREAD_COND_INITIALIZER;
 
 int main(void) {
+
+    ListInit(&buffer);
+
 
     pthread_t threads[2];
     pthread_create(&threads[0], NULL, producer, NULL);
