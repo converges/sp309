@@ -9,7 +9,7 @@ void *consumer(void*);
 
 /* Declare a shared linkedlist */
 struct LinkedList buffer;
-ListInit(buffer);
+ListInit(&buffer);
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t buffer_has_space = PTHREAD_COND_INITIALIZER;
