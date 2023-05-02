@@ -7,7 +7,9 @@ void *consumer(void*);
 
 #define MAX_BUF 100
 
-struct LinkedList* buffer = {MAX_BUF, NULL, NULL};
+/* Declare a shared linkedlist */
+struct LinkedList buffer;
+ListInit(buffer);
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t buffer_has_space = PTHREAD_COND_INITIALIZER;
@@ -31,11 +33,11 @@ void *producer(void *v) {
 
     for(int i=0; i<1000; i++) {
         pthread_mutex_lock(&mutex);
-        if(isFull(buffer)) {
+        if(isFull(&buffer)) {
             /* BUFFER FULL ! */
             pthread_cond_wait(&buffer_has_space, &mutex);
         }
-        insertItem(buffer, i);
+        insertItem(&buffer, i);
 
         pthread_cond_signal(&buffer_has_data);
         pthread_mutex_unlock(&mutex);
@@ -48,11 +50,11 @@ void *consumer (void *v) {
 
     for(int i=0; i<1000; i++) {
         pthread_mutex_lock(&mutex);
-        if (isEmpty(buffer)) {
+        if (isEmpty(&buffer)) {
             /* BUFFER EMPTY ! */
             pthread_cond_wait(&buffer_has_data, &mutex);
         }
-        data = getItem(buffer);
+        data = getItem(&buffer);
         pthread_cond_signal(&buffer_has_space);
         pthread_mutex_unlock(&mutex);
         printf("data = %d\n", data);
