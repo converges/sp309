@@ -16,7 +16,6 @@ int main(void) {
 
     ListInit(&buffer);
 
-
     pthread_t threads[2];
     pthread_create(&threads[0], NULL, producer, NULL);
     pthread_create(&threads[1], NULL, consumer, NULL);
@@ -29,7 +28,6 @@ int main(void) {
 }
 
 void *producer(void *v) {
-
 
     for(int i=0; i<1000; i++) {
         pthread_mutex_lock(&mutex);
