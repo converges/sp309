@@ -14,14 +14,14 @@ int main(void) {
 	printf("How many student?");
 	scanf("%d", &n);
 
-	if (n <= 0) {
+	if (n<=0) {
 		fprintf(stderr, "errpr: wrong number.\n");
 		fprintf(stderr, "terminate program\n");
 		exit(1);
 	}
 
-	ptr = (struct student *) calloc(n, sizeof(struct student));
-	if (ptr == NULL) {
+	ptr = (struct student *)malloc(n * sizeof(struct student));
+	if (ptr==NULL) {
 		perror("malloc");
 		exit(2);
 	}
@@ -32,7 +32,7 @@ int main(void) {
 	}
 
 	printf("\n* student information *\n");
-	for (i=n-1; i>=0; i--) {
+	for (i=n; i>=0; i--) {
 		printf("%d %s\n", ptr[i].id, ptr[i].name);
 	}
 
