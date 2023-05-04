@@ -54,6 +54,10 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Semaphore Initialization Error\n");
         return 1;
     }
+    if(sem_init(&num_data, 0, 0) < 0) {
+        fprintf(stderr, "Semaphore Initialization Error\n");
+        return 1;
+    }
     pthread_create(&thread1, NULL, Producer, NULL);
     pthread_create(&thread2, NULL, Consumer, NULL);
     pthread_join(thread1, NULL);
