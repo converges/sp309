@@ -49,7 +49,9 @@ void *Thread2(void *arg) {
     int tmp;
 
     for(int i=0; i<1000;i++) {
-        sem_wait(&hsem);
+        if(cnt<1000) {
+            sem_wait(&hsem);
+        }
         tmp=cnt;
         usleep(1000);
         cnt=tmp+1;
