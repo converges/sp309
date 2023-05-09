@@ -32,13 +32,13 @@ void *Thread1(void *arg) {
 
     int tmp;
 
+    sem_wait(&hsem);
     for(int i=0; i<1000; i++) {
-        sem_wait(&hsem);
         tmp=cnt;
         usleep(1000);
         cnt=tmp+1;
-        sem_post(&hsem);
     }
+    sem_post(&hsem);
     printf("Thread1 End\n");
 
     return NULL;
@@ -48,15 +48,13 @@ void *Thread2(void *arg) {
 
     int tmp;
 
+    sem_wait(&hsem);
     for(int i=0; i<1000;i++) {
-        if(cnt<1000) {
-            sem_wait(&hsem);
-        }
         tmp=cnt;
         usleep(1000);
         cnt=tmp+1;
-        sem_post(&hsem);
     }
+    sem_post(&hsem);
     printf("Thread2 End\n");
 
     return NULL;
