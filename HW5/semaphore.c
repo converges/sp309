@@ -18,10 +18,16 @@ int main(int argc, char *argv[]) {
         perror("Semaphore Initilization Error\n");
         return 1;
     }
+    sem_wait(&hsem);
     pthread_create(&thread1, NULL, Thread1, NULL);
-    pthread_create(&thread2, NULL, Thread2, NULL);
     pthread_join(thread1, NULL);
+    sem_post(&hsem);
+
+    sem_wait(&hsem);
+    pthread_create(&thread2, NULL, Thread2, NULL);
     pthread_join(thread2, NULL);
+    sem_post(&hsem);
+
     printf("%d\n", cnt);
     sem_destroy(&hsem);
 
@@ -32,13 +38,12 @@ void *Thread1(void *arg) {
 
     int tmp;
 
-    sem_wait(&hsem);
     for(int i=0; i<1000; i++) {
         tmp=cnt;
         usleep(1000);
         cnt=tmp+1;
+	printf("Thread 1: %d\n", cnt);
     }
-    sem_post(&hsem);
     printf("Thread1 End\n");
 
     return NULL;
@@ -48,13 +53,13 @@ void *Thread2(void *arg) {
 
     int tmp;
 
-    sem_wait(&hsem);
     for(int i=0; i<1000;i++) {
         tmp=cnt;
         usleep(1000);
         cnt=tmp+1;
+	printf("Thread 2: %d\n", cnt);
+
     }
-    sem_post(&hsem);
     printf("Thread2 End\n");
 
     return NULL;
