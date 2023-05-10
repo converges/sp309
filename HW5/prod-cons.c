@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
 #include <semaphore.h>
 
 #define MAX_BSIZE 10
@@ -63,7 +65,7 @@ void *Consumer(void *arg) {
         sem_wait(&hsem);
         cnt--;
         printf("cons cnt: %d\n", cnt);
-        sleeP(1);
+        sleep(1);
         sem_post(&hsem);
         sem_post(&num_buff);
     }
