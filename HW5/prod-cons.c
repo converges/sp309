@@ -49,9 +49,9 @@ void *Producer(void *arg) {
         sem_wait(&hsem);
         cnt++;
         printf("prod cnt: %d\n", cnt);
-        sleep(1);
         sem_post(&hsem);
         sem_post(&num_data);
+        sleep(1);
     }
     printf("Producer Ends\n");
     return NULL;
@@ -66,9 +66,9 @@ void *Consumer(void *arg) {
         sem_wait(&hsem);
         cnt--;
         printf("cons cnt: %d\n", cnt);
-        sleep(1);
         sem_post(&hsem);
         sem_post(&num_buff);
+        sleep(1);
     }
     printf("Consumer Ends\n");
     return NULL;
