@@ -1,9 +1,10 @@
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
-#include <sys/types.h>
+#include <unistd.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #define SIZE 128
 #define FIFO "fifo"
