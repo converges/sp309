@@ -27,11 +27,14 @@ int main(int argc, char *argv[]) {
         perror("Argument Error");
         exit(2);
     }
+    printf("\n");
     
+    /* stime() has been deprecated
     if (stime(&modtime) == -1) {
         perror("stime Error");
     }
     printf("modified time: %d sec from 1970, 1, 1 00 : 00 : 00\n", (int) modtime);
+    */
 
     return 0;
 }

@@ -35,6 +35,4 @@ void main(void) {
     if (strftime(str, strsize, "%A %b %d %j %U %X %r", &time_str) <= 0)
         perror("strftime Error");
     printf("%s\n", str);
-
-    return 0;
 }
