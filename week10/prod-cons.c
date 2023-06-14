@@ -28,6 +28,7 @@ void *Consumer(void *arg) {
     int tmp;
 
     for(;;) {
+        sem_wait(&num_data);
         sem_wait(&hsem);
         cnt--;
         printf("cons cnt: %d\n", cnt);

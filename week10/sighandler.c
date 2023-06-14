@@ -6,7 +6,6 @@
 static void sigcatcher(int);
 void (*was)(int);
 
-
 int main(void){
 
 	if((was=signal(SIGINT,sigcatcher))==SIG_ERR){
